@@ -3,7 +3,6 @@ It randomly sends between 750 to 800 clicks to https://stats.popcat.click/pop on
 
 Popcat only allows a maximum of 800 pops to be sent every 30 seconds, per IP address.
 
-**Headers**
 These are the headers sent along the request to avoid triggering Cloudflare's bot detection.
 ````
 Host: stats.popcat.click

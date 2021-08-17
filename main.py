@@ -13,7 +13,6 @@ import urllib.parse
 
 # def get_recaptcha_token(payload):
 #     url = "https://google.com/recaptcha/api2/reload?k=6Ledv1IaAAAAAKFJSR7VKPE8e-4kht4ZmLzencES"
-#     headers = { "Host": "recaptcha.net", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36", "Accept": "*/*", "Accept-Language": "en-US,en;q=0.5", "Accept-Encoding": "gzip, deflate, br", "Content-Type": "application/x-protobuffer", "Content-Length": "8767", "Origin": "https://recaptcha.net", "DNT": "1", "Alt-Used": "recaptcha.net", "Connection": "keep-alive", "Sec-Fetch-Dest": "empty", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Site": "same-origin" } 
 #     
 #     request_data = urllib.parse.urlencode(payload)
 #     request_data = request_data.encode("ascii")
@@ -29,7 +28,10 @@ import urllib.parse
 
 def send_clicks(params):
     url = "https://stats.popcat.click/pop"
-    headers = { "Host": "stats.popcat.click", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36", "Accept": "application/json, text/plain, */*", "Accept-Language": "en-US,en;q=0.5", "Accept-Encoding": "gzip, deflate, br", "Origin": "https://popcat.click",  "Connection": "keep-alive", "Sec-Fetch-Dest": "empty", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Site": "same-site", "Content-Type": "application/x-www-form-urlencoded" }
+    headers = (' {"Host": "stats.popcat.click", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36",'
+              ' "Accept": "application/json, text/plain, */*", "Accept-Language": "en-US,en;q=0.5", "Accept-Encoding": "gzip, deflate, br", "Origin": "https://popcat.click",  '
+              ' "Connection": "keep-alive", "Sec-Fetch-Dest": "empty", "Sec-Fetch-Mode": "cors", "Sec-Fetch-Site": "same-site", "Content-Type": "application/x-www-form-urlencoded" }')
+    headers = eval(headers)
 
     # encode additional data into bytes for body
     request_data = urllib.parse.urlencode(params)
@@ -52,7 +54,15 @@ while True:
     params["captcha_token"] = "NULL"
 
     print("Sending", params["pop_count"], "clicks")
-    response = send_clicks(params)
-    print(response)
+
+    try:
+        response = send_clicks(params)
+        print(response)
+    except urllib.error.HTTPError as e:
+        print(e)
+        print("Trying again in 30 seconds")
+    except e:
+        print(e)
+        break
 
     time.sleep(30)
