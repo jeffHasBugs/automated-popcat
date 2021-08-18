@@ -23,16 +23,24 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest pyinstaller
+        pip install flake8 pyinstaller
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
-      run: |
-        pytest main.py
     - name: Build with pyinstaller
       run: |
         pyinstaller --one-file main.py
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        # Artifact name
+        name: artifact # optional, default is artifact
+        # A file, directory or wildcard pattern that describes what to upload
+        path: main.py
+        # The desired behavior if no files are found using the provided path.
+        if-no-files-found: warn # optional, default is warn
+       # Duration after which artifact will expire in days. 0 means using default retention.
+        retention-days: 2 # optional
