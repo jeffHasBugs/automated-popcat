@@ -1,9 +1,11 @@
-This is a script that automates sending clicks to the popcat server. 
-It randomly sends between 750 to 800 clicks to https://stats.popcat.click/pop on a 30-second interval.
+This is a Python script that automates sending clicks to the popcat server. 
 
-Popcat only allows a maximum of 800 pops to be sent every 30 seconds, per IP address.
+It randomly sends between 750 to 800 clicks to https://stats.popcat.click/pop on a 30-second interval,
+sending clicks directly using HTTP requests instead of interacting with the browser.
 
-These are the headers sent along the request to avoid triggering Cloudflare's bot detection.
+Popcat allows a maximum of 800 pops to be sent every 30 seconds, per IP address.
+
+These are the headers sent along the HTTP POST request to avoid triggering Cloudflare's bot detection.
 ````
 Host: stats.popcat.click
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36
