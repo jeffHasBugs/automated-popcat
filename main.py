@@ -44,9 +44,11 @@ def send_clicks(params):
 
 
 print("This is open source software. See LICENSE.")
-print("==================================================================")
-print("Sending clicks on a 30-second interval. Press CTRL + C to stop me.")
-print("==================================================================")
+print("This may take a minute to set up. If you get HTTP Error 429, make sure you"
+      "do not have Popcat open anywhere else on your network.")
+print("============================================================================")
+print("Sending clicks to popcat on a 30-second interval. Press CTRL + C to stop me.")
+print("============================================================================")
 
 while True:
     params = dict()
@@ -61,8 +63,8 @@ while True:
     except urllib.error.HTTPError as e:
         print(e)
         print("Trying again in 30 seconds")
-    except e:
-        print(e)
+    except exception:
+        print(exception)
         break
 
     time.sleep(30)
