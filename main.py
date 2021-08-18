@@ -63,8 +63,8 @@ while True:
     except urllib.error.HTTPError as e:
         print(e)
         print("Trying again in 30 seconds")
-    except exception:
-        print(exception)
-        break
+    except:
+        print("Unexpected error")
+        raise
 
     time.sleep(30)
